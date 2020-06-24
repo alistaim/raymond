@@ -22,7 +22,7 @@ impl HittableVec {
     }
 }
 
-impl<B: Borrow<HittableVec>> Hittable for B {
+impl<B: Borrow<HittableVec> + Sync> Hittable for B {
     fn hit(&self, r: &Ray, t_min: f64, t_max: f64) -> (bool, HitRecord) {
         let mut temp_rec = HitRecord::default();
         let mut hit_anything = false;

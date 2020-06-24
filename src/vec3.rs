@@ -1,3 +1,4 @@
+use std::iter;
 use std::ops::{Add, Index, Mul, Neg, Sub};
 
 #[derive(Debug, PartialEq, Clone)]
@@ -94,6 +95,15 @@ impl Add for Vec3 {
         Vec3 {
             e: vec![self.x() + rhs.x(), self.y() + rhs.y(), self.z() + rhs.z()],
         }
+    }
+}
+
+impl iter::Sum<Vec3> for Vec3 {
+    fn sum<I>(iter: I) -> Vec3
+    where
+        I: Iterator<Item = Vec3>,
+    {
+        iter.fold(Vec3::new(0.0, 0.0, 0.0), Add::add)
     }
 }
 

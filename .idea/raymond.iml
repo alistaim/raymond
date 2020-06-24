@@ -16,6 +16,7 @@
       <sourceFolder url="file://$MODULE_DIR$/target/debug/build/memoffset-ecbce74fa6205b73/out" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/debug/build/rayon-core-577c3c85f5e42836/out" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/debug/build/libc-a8f893689cd28eb2/out" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/target/debug/build/getrandom-dda2ee63679626c7/out" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
