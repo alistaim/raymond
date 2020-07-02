@@ -12,6 +12,7 @@ impl Ray {
     }
 
     pub fn at(&self, t: f64) -> Vec3 {
-        Vec3::from_vec3(self.direction.smul(t) + self.origin.clone())
+        let x = self.direction.smul(t);
+        &x + &self.origin
     }
 }

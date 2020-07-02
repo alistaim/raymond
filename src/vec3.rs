@@ -14,8 +14,10 @@ impl Vec3 {
         Vec3 { e: vec![x, y, z] }
     }
 
-    pub fn from_vec3(v: Vec3) -> Vec3 {
-        Vec3 { e: v.e }
+    pub fn from_vec3(v: &Vec3) -> Vec3 {
+        Vec3 {
+            e: vec![v.x(), v.y(), v.z()],
+        }
     }
 
     pub fn x(&self) -> f64 {
@@ -95,6 +97,14 @@ impl Add for Vec3 {
         Vec3 {
             e: vec![self.x() + rhs.x(), self.y() + rhs.y(), self.z() + rhs.z()],
         }
+    }
+}
+
+impl<'a, 'b> Add<&'b Vec3> for &'a Vec3 {
+    type Output = Vec3;
+
+    fn add(self, rhs: &'b Vec3) -> Vec3 {
+        Vec3::new(self.x() + rhs.x(), self.y() + rhs.y(), self.z() + rhs.z())
     }
 }
 

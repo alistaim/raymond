@@ -12,9 +12,11 @@ pub struct HitRecord {
 impl HitRecord {
     pub fn set_face_normal(&mut self, r: &Ray, outward_normal: &Vec3) {
         self.front_face = dot(&r.direction, outward_normal) < 0.0;
-        self.normal = match self.front_face {
-            true => outward_normal.clone(),
-            false => -outward_normal.clone(),
+
+        if self.front_face {
+            self.normal = Vec3::from_vec3(outward_normal)
+        } else {
+            self.normal = -Vec3::from_vec3(outward_normal)
         }
     }
 

@@ -20,7 +20,7 @@ fn main() {
     let aspect_ratio = 16.0 / 9.0;
     let image_width = 384;
     let image_height = (image_width as f64 / aspect_ratio) as i32;
-    let samples_per_pixel = 10;
+    let samples_per_pixel = 100;
 
     println!("P3\n{} {}\n255\n", image_width, image_height);
 
@@ -33,8 +33,7 @@ fn main() {
     for j in (0..image_height).rev() {
         eprintln!("Scanlines remaining: {} ", j);
         for i in 0..image_width {
-            let mut pixel_color: Color = (0..samples_per_pixel)
-                .into_par_iter()
+            let pixel_color: Color = (0..samples_per_pixel)
                 .map(|_s| {
                     let mut rng = rand::thread_rng();
                     let u = (i as f64 + rng.gen::<f64>()) / ((image_width - 1) as f64);

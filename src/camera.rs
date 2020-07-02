@@ -29,10 +29,9 @@ impl Camera {
     }
 
     pub fn get_ray(&self, u: f64, v: f64) -> Ray {
-        Ray::new(
-            self.origin.clone(),
-            self.lower_left_corner.clone() + (self.horizontal.smul(u)) + (self.vertical.smul(v))
-                - self.origin.clone(),
-        )
+        let direction = (&self.lower_left_corner + &(self.horizontal.smul(u)))
+            + (&self.vertical.smul(v) - &self.origin);
+
+        Ray::new(Vec3::from_vec3(&self.origin), direction)
     }
 }
