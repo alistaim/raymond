@@ -6,7 +6,7 @@ pub struct HitRecord {
     pub(crate) p: Point3,
     pub(crate) normal: Vec3,
     pub(crate) front_face: bool,
-    pub(crate) t: f64,
+    pub(crate) t: f32,
 }
 
 impl HitRecord {
@@ -31,5 +31,5 @@ impl HitRecord {
 }
 
 pub trait Hittable: Sync {
-    fn hit(&self, r: &Ray, t_min: f64, t_max: f64) -> (bool, HitRecord);
+    fn hit(&self, r: &Ray, t_min: f32, t_max: f32) -> (bool, HitRecord);
 }

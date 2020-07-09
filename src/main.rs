@@ -19,7 +19,7 @@ use rayon::prelude::*;
 fn main() {
     let aspect_ratio = 16.0 / 9.0;
     let image_width = 384;
-    let image_height = (image_width as f64 / aspect_ratio) as i32;
+    let image_height = (image_width as f32 / aspect_ratio) as i32;
     let samples_per_pixel = 100;
 
     println!("P3\n{} {}\n255\n", image_width, image_height);
@@ -36,8 +36,8 @@ fn main() {
             let pixel_color: Color = (0..samples_per_pixel)
                 .map(|_s| {
                     let mut rng = rand::thread_rng();
-                    let u = (i as f64 + rng.gen::<f64>()) / ((image_width - 1) as f64);
-                    let v = (j as f64 + rng.gen::<f64>()) / ((image_height - 1) as f64);
+                    let u = (i as f32 + rng.gen::<f32>()) / ((image_width - 1) as f32);
+                    let v = (j as f32 + rng.gen::<f32>()) / ((image_height - 1) as f32);
 
                     let r = cam.get_ray(u, v);
                     ray_color(&r, &world)
@@ -51,7 +51,7 @@ fn main() {
 }
 
 fn ray_color<W: Hittable>(r: &Ray, world: W) -> Color {
-    let (did_hit, record) = world.hit(r, 0.0, f64::INFINITY);
+    let (did_hit, record) = world.hit(r, 0.0, f32::INFINITY);
     if did_hit {
         (record.normal + Color::new(1.0, 1.0, 1.0)).smul(0.5)
     } else {

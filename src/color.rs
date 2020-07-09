@@ -5,7 +5,7 @@ pub fn write_color(pixel_color: Color, samples_per_pixel: i32) {
     let mut g = pixel_color.y();
     let mut b = pixel_color.z();
 
-    let scale = 1.0 / samples_per_pixel as f64;
+    let scale = 1.0 / samples_per_pixel as f32;
     r *= scale;
     g *= scale;
     b *= scale;
@@ -18,7 +18,7 @@ pub fn write_color(pixel_color: Color, samples_per_pixel: i32) {
     );
 }
 
-pub fn clamp(x: f64, min: f64, max: f64) -> f64 {
+pub fn clamp(x: f32, min: f32, max: f32) -> f32 {
     if x < min {
         min
     } else if x > max {

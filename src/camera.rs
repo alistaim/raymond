@@ -28,7 +28,7 @@ impl Camera {
         }
     }
 
-    pub fn get_ray(&self, u: f64, v: f64) -> Ray {
+    pub fn get_ray(&self, u: f32, v: f32) -> Ray {
         let direction = (&self.lower_left_corner + &(self.horizontal.smul(u)))
             + (&self.vertical.smul(v) - &self.origin);
 

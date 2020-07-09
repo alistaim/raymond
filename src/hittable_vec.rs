@@ -23,7 +23,7 @@ impl HittableVec {
 }
 
 impl<B: Borrow<HittableVec> + Sync> Hittable for B {
-    fn hit(&self, r: &Ray, t_min: f64, t_max: f64) -> (bool, HitRecord) {
+    fn hit(&self, r: &Ray, t_min: f32, t_max: f32) -> (bool, HitRecord) {
         let mut temp_rec = HitRecord::default();
         let mut hit_anything = false;
         let mut closest_so_far = t_max;

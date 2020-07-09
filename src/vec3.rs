@@ -3,14 +3,14 @@ use std::ops::{Add, Index, Mul, Neg, Sub};
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct Vec3 {
-    e: Vec<f64>,
+    e: Vec<f32>,
 }
 
 pub type Color = Vec3;
 pub type Point3 = Vec3;
 
 impl Vec3 {
-    pub fn new(x: f64, y: f64, z: f64) -> Vec3 {
+    pub fn new(x: f32, y: f32, z: f32) -> Vec3 {
         Vec3 { e: vec![x, y, z] }
     }
 
@@ -20,19 +20,19 @@ impl Vec3 {
         }
     }
 
-    pub fn x(&self) -> f64 {
+    pub fn x(&self) -> f32 {
         self.e[0]
     }
 
-    pub fn y(&self) -> f64 {
+    pub fn y(&self) -> f32 {
         self.e[1]
     }
 
-    pub fn z(&self) -> f64 {
+    pub fn z(&self) -> f32 {
         self.e[2]
     }
 
-    pub fn dot(&self, rhs: Vec3) -> f64 {
+    pub fn dot(&self, rhs: Vec3) -> f32 {
         self.e.iter().zip(rhs.e.iter()).map(|(l, r)| l * r).sum()
     }
 
@@ -44,15 +44,15 @@ impl Vec3 {
         )
     }
 
-    pub fn smul(&self, s: f64) -> Vec3 {
+    pub fn smul(&self, s: f32) -> Vec3 {
         Vec3 {
-            e: self.e.iter().map(|i| i * s).collect::<Vec<f64>>(),
+            e: self.e.iter().map(|i| i * s).collect::<Vec<f32>>(),
         }
     }
 
-    pub fn sdiv(&self, s: f64) -> Vec3 {
+    pub fn sdiv(&self, s: f32) -> Vec3 {
         Vec3 {
-            e: self.e.iter().map(|i| i * (1.0 / s)).collect::<Vec<f64>>(),
+            e: self.e.iter().map(|i| i * (1.0 / s)).collect::<Vec<f32>>(),
         }
     }
 
@@ -62,11 +62,11 @@ impl Vec3 {
         }
     }
 
-    pub fn length(&self) -> f64 {
+    pub fn length(&self) -> f32 {
         self.length_squared().sqrt()
     }
 
-    pub fn length_squared(&self) -> f64 {
+    pub fn length_squared(&self) -> f32 {
         self.e.iter().map(|i| i * i).sum()
     }
 }
@@ -85,7 +85,7 @@ pub fn cross(lhs: &Vec3, rhs: &Vec3) -> Vec3 {
     )
 }
 
-pub fn dot(lhs: &Vec3, rhs: &Vec3) -> f64 {
+pub fn dot(lhs: &Vec3, rhs: &Vec3) -> f32 {
     lhs.e.iter().zip(rhs.e.iter()).map(|(l, r)| l * r).sum()
 }
 
@@ -154,9 +154,9 @@ impl<'a, 'b> Sub<&'b Vec3> for &'a Vec3 {
 }
 
 impl Index<usize> for Vec3 {
-    type Output = f64;
+    type Output = f32;
 
-    fn index(&self, index: usize) -> &f64 {
+    fn index(&self, index: usize) -> &f32 {
         &self.e[index]
     }
 }
@@ -184,7 +184,7 @@ mod tests {
     #[test]
     fn test_length() {
         let a = Vec3::new(1.0, 2.0, 3.0);
-        assert_eq!(a.length(), (14.00 as f64).sqrt());
+        assert_eq!(a.length(), (14.00 as f32).sqrt());
     }
 
     #[test]
@@ -204,7 +204,7 @@ mod tests {
         let a = Vec3::new(1.0, 2.0, 3.0);
         let b = Vec3::new(1.0, 2.0, 3.0);
 
-        assert_eq!(a.dot(b), 14.0 as f64);
+        assert_eq!(a.dot(b), 14.0 as f32);
     }
 
     #[test]
