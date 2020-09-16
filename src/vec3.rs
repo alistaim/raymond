@@ -45,9 +45,7 @@ impl Vec3 {
     }
 
     pub fn smul(&self, s: f32) -> Vec3 {
-        Vec3 {
-            e: self.e.iter().map(|i| i * s).collect::<Vec<f32>>(),
-        }
+        Vec3::new(self.x() * s, self.y() * s, self.z() * s)
     }
 
     pub fn sdiv(&self, s: f32) -> Vec3 {
@@ -67,7 +65,7 @@ impl Vec3 {
     }
 
     pub fn length_squared(&self) -> f32 {
-        self.e.iter().map(|i| i * i).sum()
+            self.e.iter().map(|i| i * i).sum()
     }
 }
 
@@ -86,7 +84,11 @@ pub fn cross(lhs: &Vec3, rhs: &Vec3) -> Vec3 {
 }
 
 pub fn dot(lhs: &Vec3, rhs: &Vec3) -> f32 {
-    lhs.e.iter().zip(rhs.e.iter()).map(|(l, r)| l * r).sum()
+
+    lhs.x() * rhs.x() +
+    lhs.y() * rhs.y() +
+    lhs.z() * rhs.z()
+
 }
 
 // Trait implementations

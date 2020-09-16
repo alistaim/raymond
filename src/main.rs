@@ -14,13 +14,12 @@ use crate::ray::Ray;
 use crate::sphere::Sphere;
 use crate::vec3::{unit_vector, Color, Point3, Vec3};
 use rand::Rng;
-use rayon::prelude::*;
 
 fn main() {
     let aspect_ratio = 16.0 / 9.0;
     let image_width = 384;
     let image_height = (image_width as f32 / aspect_ratio) as i32;
-    let samples_per_pixel = 100;
+    let samples_per_pixel = 10;
 
     println!("P3\n{} {}\n255\n", image_width, image_height);
 
@@ -29,13 +28,13 @@ fn main() {
     world.add(Sphere::new(Point3::new(0.0, -100.5, -1.0), 100.0));
 
     let cam = Camera::new();
+    let mut rng = rand::thread_rng();
 
     for j in (0..image_height).rev() {
-        eprintln!("Scanlines remaining: {} ", j);
+        // eprintln!("Scanlines remaining: {} ", j);
         for i in 0..image_width {
             let pixel_color: Color = (0..samples_per_pixel)
                 .map(|_s| {
-                    let mut rng = rand::thread_rng();
                     let u = (i as f32 + rng.gen::<f32>()) / ((image_width - 1) as f32);
                     let v = (j as f32 + rng.gen::<f32>()) / ((image_height - 1) as f32);
 
